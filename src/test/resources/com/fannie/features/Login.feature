@@ -1,3 +1,4 @@
+@web
 Feature: Login Feature
 
 Scenario Outline: User should able to login

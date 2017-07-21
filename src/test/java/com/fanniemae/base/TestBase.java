@@ -15,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import cucumber.api.java.Before;
 //import org.testng.annotations.AfterSuite;
 //import org.testng.annotations.BeforeSuite;
 
@@ -28,8 +30,8 @@ public class TestBase {
 	public static WebDriverWait wait;
 	//public static Logger log = Logger.getLogger("devpinoyLogger");
 	
-	//@BeforeSuite
-	public void setUp() {
+	//@Before("@web")
+	public static void setUp() {
 	
 	
 	if (driver == null) {
@@ -111,12 +113,26 @@ public class TestBase {
 
 	}
 	
-	public boolean isElementPresent(By byLocator) {
+	public boolean isElementPresent(String locator) {
 
 		try {
+			
+			if (locator.startsWith("css_")) {
+				driver.findElement(By.cssSelector(OR.getProperty(locator))).click();
+				return true;
+			} else if (locator.startsWith("xpath_")) {
+				driver.findElement(By.xpath(OR.getProperty(locator))).click();
+				System.out.println("xpath LOCATOR: " + (OR.getProperty(locator)));
+				return true;
+				
+			} else if (locator.startsWith("id_")) {
+				driver.findElement(By.id(OR.getProperty(locator))).click();
+				return true;
+			}else{
+				return false;
+			}
 
-			driver.findElement(byLocator);
-			return true;
+					
 
 		} catch (NoSuchElementException e) {
 

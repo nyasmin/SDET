@@ -15,8 +15,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+//import org.testng.annotations.AfterSuite;
+//import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 	
@@ -28,7 +28,7 @@ public class TestBase {
 	public static WebDriverWait wait;
 	//public static Logger log = Logger.getLogger("devpinoyLogger");
 	
-	@BeforeSuite
+	//@BeforeSuite
 	public void setUp() {
 	
 	
@@ -172,7 +172,7 @@ public class TestBase {
 
 	}
 	
-	@AfterSuite
+	//@AfterSuite
 	public void tearDown() {
 
 		System.out.println("Driver "+driver);

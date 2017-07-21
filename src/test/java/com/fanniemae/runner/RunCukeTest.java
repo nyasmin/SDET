@@ -8,7 +8,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = {"src/test/resources/com/fannie/features"},
-		glue = {"src/test/java/com/fanniemae/steps"}
+		glue = "com.fanniemae.steps"
 //		plugin = { 
 //					"pretty",
 //					"html:target/cucumber-reports",

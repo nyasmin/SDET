@@ -1,0 +1,57 @@
+Username :
+Password:
+
+
+Browser version plays role in selenium testing.
+
+For cloud testing : specific infra is needed.(Suce Lab)
+
+Docker Container for deployment.
+
+Compatibility issues if java version is diff.
+
+
+Selenium IDE is for firefox, but code can be executed to other browser as well.
+Selenium grid is for parallel execution.
+
+
+How feasible is the conversion from java automation to other programming language?
+Recording does not do guarrenteee assert and verification.
+
+Verify executes the remaining part after the failed.
+Assert does not execute the test case once failed
+
+selenium 3 needs firefox webdriver. (Mozilla GetCo driver)
+
+@Ignore : Skips the test case
+
+14b2ba8e64f64ef7a4aef136e982ddb5
+
+Jenkins : nyasmin/Password@123
+
+http://localhost:9215/
+
+
+Error: Could not find or load main class cucumber.api.cli.Main : cucumber jar is missing
+
+
+@BeforeClass means?
+order of execution is to be maintained in XML files
+this testNG.xml is per project
+
+DataProviders annotion where to apply?
+
+
+gu170717/cymvna
+
+
+HTMLUnitDriver.
+
+
+report folder are generated at run time from runner
+
+user.dir = properties->location
+
+
+git init
+java -jar jenkins.war -httpPort = 9215

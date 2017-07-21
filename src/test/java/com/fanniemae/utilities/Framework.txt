@@ -1,0 +1,216 @@
+Framework:
+
+I.Settingup the Environment
+   a.check JAVA version
+   b.check MAVEN version
+
+II.Create a Maven Project
+   a.adding dependencies (google testNG maven 
+
+dependency)
+   b.adding Selenium dependency
+
+   
+   c.adding build capability with maven-surefire-
+
+plugin
+   d.setting up configuration (element) of 
+
+testRunners, ex: testNG.xml
+     optionally using <properties> setting up in 
+
+test/resources folder
+
+   e.setting up the structure by creating the 
+
+following in the src/test/resources
+     1.excel (testdata.xls)
+     2.executables (chromedriver.exe, 
+
+geckodriver.exe, ieServerDriver.exe)
+     3.extentreportsconfig (ReportsConfig.xml)
+     4.logs (App.log, Selenium.log)
+     5.properties (Config.properties, OR.properties)
+     6.runners (testng.xml)
+     7.screenshots (saving all screenshots)
+
+   f.continuing setting up the structure by creating 
+
+packages in the src/test/java
+     1.com.fanniemae.base (TestBase.java 
+
+class)...all testcases will extend this class
+     2.com.fanniemae.listeners (CustomListeners.java 
+
+class) implements ITestListener
+     3.com.fanniemae.testcases
+     4.com.fanniemae.utilities (ExtentManager.java 
+
+class, saving of extentreports)
+
+III. Begin writing the code
+
+     Create Config.properties inside the 
+
+sr/test/resources/properties
+
+     Inside Config.properties:
+       browser=ie
+   
+
+testsiteurl=http://sdettraining.com/trguitransaction
+
+s/default.aspx?id=new
+implicit.wait=10
+
+
+     Add Driver.exes (gecko.exe, chromedriver.exe 
+
+and iedriverserver.exe to the 
+
+src/test/resources/executables folder)
+
+     1. Designing the TestBase class
+	 
+	    Declare variables that will be used in this class:
+		
+		public static WebDriver driver;
+	public static Properties config = new Properties();
+	public static Properties OR = new Properties();
+	public static FileInputStream fis;
+	public static FileInputStream fis;
+	 
+	    Add two methods:
+		
+		   @BeforeSuite
+	public void setUp() {
+	
+	
+	if (driver == null) {
+
+			try {
+				fis = new FileInputStream(
+						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Config.properties");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				config.load(fis);
+				log.debug("Config file loaded !!!");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			try {
+				fis = new FileInputStream(
+						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\OR.properties");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				OR.load(fis);
+				log.debug("OR file loaded !!!");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
+				
+				browser = System.getenv("browser");
+			}else{
+				
+				browser = config.getProperty("browser");
+				
+			}
+			
+			config.setProperty("browser", browser);
+			
+			
+			
+
+			if (config.getProperty("browser").equals("firefox")) {
+
+				// System.setProperty("webdriver.gecko.driver", "gecko.exe");
+				driver = new FirefoxDriver();
+				log.debug("FF Launched !!!");
+
+			} else if (config.getProperty("browser").equals("chrome")) {
+
+				System.setProperty("webdriver.chrome.driver",
+						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
+				driver = new ChromeDriver();
+				log.debug("Chrome Launched !!!");
+			} else if (config.getProperty("browser").equals("ie")) {
+
+				System.setProperty("webdriver.ie.driver",
+						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
+				driver = new InternetExplorerDriver();
+				log.debug("IE Launched !!!");
+
+			}
+
+			driver.get(config.getProperty("testsiteurl"));
+			log.debug("Navigated to : " + config.getProperty("testsiteurl"));
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty("implicit.wait")),
+					TimeUnit.SECONDS);
+			wait = new WebDriverWait(driver, 5);
+		}
+
+	}
+	
+	
+	
+	}
+	 
+	 
+	 
+	 
+	 @AfterSuite
+	public void tearDown() {
+
+		
+	}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+     2. Creating TestCases
+     3. Running a DDT using data from external 
+
+repository using JDBC jar
+
+IV. Deploying the code to GitHub
+
+V. Run scheduled jobs from Jenkins

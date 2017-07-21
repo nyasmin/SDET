@@ -42,11 +42,11 @@
 				<!-- <configuration> <testFailureIgnore> false </testFailureIgnore> <suiteXmlFiles> 
 					<suiteXmlFile>src/test/resources/runners/testng.xml</suiteXmlFile> </suiteXmlFiles> 
 					</configuration> -->
-				<!-- <configuration>
+				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 					</suiteXmlFiles>
-				</configuration> -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
